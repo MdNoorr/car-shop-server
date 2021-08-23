@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const admin = require("firebase-admin");
 
-var serviceAccount = require("./photography-12-firebase-adminsdk-5lgjt-9ff887855c.json");
+var serviceAccount = require("./configs/photography-12-firebase-adminsdk-5lgjt-9ff887855c.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
