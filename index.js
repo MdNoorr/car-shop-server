@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const admin = require("firebase-admin");
 
-var serviceAccount = require("./configs/photography-12-firebase-adminsdk-5lgjt-9ff887855c.json");
+var serviceAccount = require("./configs/car-shop-a3965-firebase-adminsdk-720d0-68b3e559ad.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://photography-12.firebaseio.com",
+  databaseURL: "https://car-shop-a3965-default-rtdb.firebaseio.com",
 });
 
 const port = 5000;
@@ -82,49 +82,48 @@ client.connect((err) => {
     });
   });
 
-  // app.get("/recieve", (req, res) => {
-  //   BuyNowCollection.find({email : req.query.email}).toArray((err, events) => {
-  //     res.send(events);
-  //     // console.log(events);
-  //   });
-  // });
-
-  
   app.get("/recieve", (req, res) => {
-    const bearer = req.headers.authorization;
-
-    if (bearer && bearer.startsWith("Bearer ")) {
-      const idToken = bearer.split(" ")[1];
-      console.log({ idToken });
-
-      // idToken comes from the client app
-      admin
-        .auth()
-        .verifyIdToken(idToken)
-        .then((decodedToken) => {
-          let uid = decodedToken.uid;
-          let email = decodedToken.email;
-          const queryEmail = req.query.email;
-          // console.log(queryEmail, uid, email);
-          if (uid && email) {
-            BuyNowCollection.find({ email: req.query.email }).toArray(
-              (err, events) => {
-                res.status(200).send(events);
-                // console.log(events);
-              }
-            );
-          } else {
-            res.status(401).send("Unauthorized access");
-          }
-          // console.log({ uid });
-        })
-        .catch((error) => {
-          res.status(401).send("Unauthorized access");
-        });
-    } else {
-      res.status(401).send("Unauthorized access");
-    }
+    BuyNowCollection.find({email : req.query.email}).toArray((err, events) => {
+      res.send(events);
+      // console.log(events);
+    });
   });
+
+  // app.get("/recieve", (req, res) => {
+  //   const bearer = req.headers.authorization;
+
+  //   if (bearer && bearer.startsWith("Bearer ")) {
+  //     const idToken = bearer.split(" ")[1];
+  //     console.log({ idToken });
+
+  //     // idToken comes from the client app
+  //     admin
+  //       .auth()
+  //       .verifyIdToken(idToken)
+  //       .then((decodedToken) => {
+  //         let uid = decodedToken.uid;
+  //         let email = decodedToken.email;
+  //         const queryEmail = req.query.email;
+  //         // console.log(queryEmail, uid, email);
+  //         if (uid && email) {
+  //           BuyNowCollection.find({ email: req.query.email }).toArray(
+  //             (err, events) => {
+  //               res.status(200).send(events);
+  //               // console.log(events);
+  //             }
+  //           );
+  //         } else {
+  //           res.status(401).send("Unauthorized access");
+  //         }
+  //         // console.log({ uid });
+  //       })
+  //       .catch((error) => {
+  //         res.status(401).send("Unauthorized access");
+  //       });
+  //   } else {
+  //     res.status(401).send("Unauthorized access");
+  //   }
+  // });
 });
 
 app.listen(process.env.PORT || port);
