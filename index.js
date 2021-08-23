@@ -13,14 +13,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const admin = require("firebase-admin");
+// const admin = require("firebase-admin");
 
-var serviceAccount = require("./configs/car-shop-a3965-firebase-adminsdk-720d0-68b3e559ad.json");
+// var serviceAccount = require("./configs/car-shop-a3965-firebase-adminsdk-720d0-68b3e559ad.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://car-shop-a3965-default-rtdb.firebaseio.com",
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://car-shop-a3965-default-rtdb.firebaseio.com",
+// });
 
 const port = 5000;
 
