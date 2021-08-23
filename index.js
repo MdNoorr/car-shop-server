@@ -13,14 +13,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const admin = require("firebase-admin");
+// const admin = require("firebase-admin");
 
-var serviceAccount = require("./configs/photography-12-firebase-adminsdk-5lgjt-9ff887855c.json");
+// var serviceAccount = require("./configs/photography-12-firebase-adminsdk-5lgjt-9ff887855c.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://photography-12.firebaseio.com",
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://photography-12.firebaseio.com",
+// });
 
 const port = 5000;
 
